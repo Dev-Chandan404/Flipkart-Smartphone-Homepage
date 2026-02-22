@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flipkart Mobile Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+      background-color: #f1f3f6;
+    }
+
+    .main {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar Styles */
+    .box1 {
+      height: 56px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: #2874f0;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #child {
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .Explore {
+      font-size: 10px;
+      font-style: italic;
+      color: #fff;
+      margin-top: 2px;
+      line-height: 1.2;
+    }
+
+    .Plus {
+      font-size: 10px;
+      font-style: italic;
+      color: #ffe500;
+    }
+
+    #parent {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      margin: 0 20px;
+    }
+
+    #child2 {
+      width: 100%;
+      position: relative;
+    }
+
+    .icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #2874f0;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .txt {
+      height: 36px;
+      width: 100%;
+      padding: 0 40px 0 12px;
+      border: none;
+      border-radius: 2px;
+      font-size: 14px;
+      background-color: #f5f7fa;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.2s;
+    }
+
+    .txt:focus {
+      background-color: #fff;
+      outline: none;
+    }
+
+    #login,
+    .seller,
+    .more,
+    .cart {
+      margin: 0 16px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    #login:hover,
+    .seller:hover,
+    .more:hover,
+    .cart:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffe500;
+      border-radius: 2px;
+    }
+
+    .loginbtn {
+      padding: 8px 24px;
+      background-color: #fff;
+      color: #2874f0;
+      font-size: 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .loginbtn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .plusicon {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    /* Content Styles */
+    .content {
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - 56px);
+    }
+
+    .boxleft {
+      width: 280px;
+      background-color: #fff;
+      padding: 16px;
+      border-right: 1px solid #e0e0e0;
+      overflow-y: auto;
+    }
+
+    .boxright {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .box3 {
+      margin-left: 8px;
+    }
+
+    .box4 {
+      width: 100%;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 16px;
+      color: #212121;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .box4:hover {
+      color: #2874f0;
+    }
+
+    .filter-content {
+      display: none;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+    }
+
+    .filter-content.show {
+      display: block;
+    }
+
+    .card {
+      width: 100%;
+      display: flex;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 16px;
+      background-color: #fff;
+      padding: 16px;
+      border-radius: 4px;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card2 {
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card3 {
+      width: 50%;
+      padding: 16px;
+    }
+
+    .card4 {
+      width: 25%;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .img2 {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+    }
+
+    .img3 {
+      width: 60px;
+      height: auto;
+      margin: 8px 0;
+    }
+
+    input[type="checkbox"] {
+      margin: 8px 8px 8px 0;
+      cursor: pointer;
+      accent-color: #2874f0;
+    }
+
+    .category {
+      margin-top: 8px;
+      font-size: 16px;
+      color: #212121;
+      font-weight: 500;
+    }
+
+    li {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #212121;
+    }
+
+    #RamOptions {
+      background-color: #f5f7fa;
+      padding: 8px;
+      border-left: 3px solid #2874f0;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin: 6px 0;
+      font-size: 14px;
+      color: #212121;
+    }
+
+    .color-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .color-circle.selected {
+      border: 2px solid #2874f0;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 600;
+      color: #212121;
+      margin-bottom: 8px;
+    }
+
+    .discount {
+      color: #878787;
+      font-size: 14px;
+      text-decoration: line-through;
+      margin-right: 8px;
+    }
+
+    .offer {
+      font-weight: 500;
+      color: #388e3c;
+      font-size: 14px;
+    }
+
+    .delivery,
+    .exchange-info,
+    .bank,
+    .left {
+      font-size: 12px;
+      margin: 4px 0;
+      color: #212121;
+    }
+
+    .left {
+      color: #c70055;
+      font-weight: 500;
+    }
+
+    .bank {
+      color: #388e3c;
+      font-weight: 500;
+    }
+
+    #resultCount {
+      font-weight: 500;
+      font-size: 14px;
+      color: #212121;
+      margin-bottom: 16px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 16px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.3s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #878787;
+    }
+
+    .close:hover {
+      color: #212121;
+    }
+
+    .seller-form,
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .seller-form input,
+    .seller-form button {
+      padding: 10px;
+      margin: 4px 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .seller-form button {
+      background-color: #2874f0;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .seller-form button:hover {
+      background-color: #1a5dc7;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: auto;
+    }
+
+    .cart-item select {
+      padding: 6px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+
+    .cart-total {
+      font-weight: 500;
+      text-align: right;
+      padding: 8px;
+      font-size: 16px;
+      color: #212121;
+    }
+
+    .checkout-btn {
+      background-color: #fb641b;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .checkout-btn:hover {
+      background-color: #e55a17;
+    }
+
+    .add-to-cart {
+      background-color: #ff9f00;
+      color: #fff;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+
+    .add-to-cart:hover {
+      background-color: #e68f00;
+    }
+
+    .staricon {
+      height: 20px;
+      width: 40px;
+      border-radius: 4px;
+      font-size: 12px;
+      text-align: center;
+      font-weight: 500;
+      background-color: #388e3c;
+      color: white;
+      display: inline-block;
+      line-height: 20px;
+    }
+
+    .rating {
+      display: none;
+      height: 120px;
+      width: 300px;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      padding: 8px;
+      font-size: 12px;
+      color: #212121;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .staricon:hover+.rating {
+      display: flex;
+    }
+
+    .r2 {
+      width: 40%;
+    }
+
+    .r3 {
+      width: 60%;
+      overflow: auto;
+    }
+
+    .r2first {
+      height: 50%;
+      text-align: center;
+      align-content: center;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .r2second {
+      height: 50%;
+      font-size: 12px;
+      text-align: center;
+      color: #878787;
+      font-weight: 500;
+    }
+
+    .r3first {
+      height: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .r3second {
+      width: 40px;
+      font-weight: 500;
+      color: #878787;
+      font-size: 12px;
+    }
+
+    .ff {
+      font-size: 14px;
+    }
+
+    .filter-toggle {
+      display: none;
+      background-color: #2874f0;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 8px 12px;
+      position: sticky;
+      top: 56px;
+      z-index: 998;
+      transition: background-color 0.2s;
+    }
+
+    .filter-toggle:hover {
+      background-color: #1a5dc7;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .box1 {
+        padding: 0 16px;
+      }
+
+      #child {
+        width: 90px;
+      }
+
+      #parent {
+        margin: 0 16px;
+      }
+
+      .boxleft {
+        width: 240px;
+      }
+
+      .boxright {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 12px;
+      }
+
+      .img2 {
+        max-height: 160px;
+      }
+
+      .card3,
+      .card4 {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .box1 {
+        padding: 0 12px;
+      }
+
+      #child {
+        width: 80px;
+      }
+
+      .Explore,
+      .Plus {
+        font-size: 9px;
+      }
+
+      #parent {
+        margin: 0 12px;
+      }
+
+      .txt {
+        height: 34px;
+        font-size: 13px;
+      }
+
+      .icon {
+        font-size: 14px;
+      }
+
+      #login,
+      .seller,
+      .more,
+      .cart {
+        margin: 0 12px;
+        font-size: 13px;
+      }
+
+      .loginbtn {
+        padding: 6px 18px;
+        font-size: 13px;
+      }
+
+      .content {
+        flex-direction: column;
+        position: relative;
+      }
+
+      .boxleft {
+        width: 100%;
+        max-width: 320px;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        height: calc(100vh - 56px);
+        transform: translateX(-100%);
+        z-index: 999;
+        background-color: #fff;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .boxleft.active {
+        transform: translateX(0);
+      }
+
+      .boxright {
+        width: 100%;
+        padding: 12px;
+      }
+
+      .filter-toggle {
+        display: block;
+      }
+
+      .card {
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 12px;
+      }
+
+      .card2,
+      .card3,
+      .card4 {
+        width: 100%;
+        text-align: center;
+      }
+
+      .card2 {
+        margin-bottom: 12px;
+      }
+
+      .card4 {
+        align-items: center;
+      }
+
+      .img2 {
+        max-height: 140px;
+      }
+
+      .price {
+        font-size: 16px;
+      }
+
+      .category {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .box1 {
+        height: auto;
+        padding: 8px 10px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      #child {
+        width: 70px;
+      }
+
+      .Explore,
+      .Plus {
+        font-size: 8px;
+      }
+
+      .plusicon {
+        width: 12px;
+        height: 12px;
+      }
+
+      #parent {
+        flex: 1;
+        margin: 6px 0;
+      }
+
+      .txt {
+        height: 32px;
+        font-size: 12px;
+        padding-right: 32px;
+      }
+
+      .icon {
+        font-size: 13px;
+      }
+
+      #login,
+      .seller,
+      .more,
+      .cart {
+        margin: 0 8px;
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      .loginbtn {
+        padding: 6px 14px;
+        font-size: 12px;
+      }
+
+      .boxleft {
+        max-width: 280px;
+      }
+
+      .box4 {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .filter-content label {
+        font-size: 12px;
+      }
+
+      .card {
+        padding: 10px;
+      }
+
+      .card3,
+      .card4 {
+        padding: 10px;
+      }
+
+      .price {
+        font-size: 15px;
+      }
+
+      .category {
+        font-size: 13px;
+      }
+
+      .modal-content {
+        margin: 15% auto;
+        width: 92%;
+        padding: 12px;
+      }
+
+      .seller-form input,
+      .seller-form button {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      .cart-item {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 6px;
+      }
+
+      .cart-item img {
+        width: 50px;
+      }
+
+      .cart-item select {
+        font-size: 12px;
+      }
+
+      .checkout-btn {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      .add-to-cart {
+        font-size: 12px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .box1 {
+        padding: 6px 8px;
+        gap: 6px;
+      }
+
+      #child {
+        width: 60px;
+      }
+
+      .Explore,
+      .Plus {
+        font-size: 7px;
+      }
+
+      .plusicon {
+        width: 10px;
+        height: 10px;
+      }
+
+      .txt {
+        height: 28px;
+        font-size: 10px;
+        padding-right: 28px;
+      }
+
+      .icon {
+        font-size: 12px;
+      }
+
+      #login,
+      .seller,
+      .more,
+      .cart {
+        margin: 0 6px;
+        font-size: 10px;
+        padding: 4px;
+      }
+
+      .loginbtn {
+        padding: 4px 10px;
+        font-size: 10px;
+      }
+
+      .boxleft {
+        max-width: 260px;
+      }
+
+      .box4 {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      .filter-content label {
+        font-size: 11px;
+      }
+
+      .filter-toggle {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .card {
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+
+      .img2 {
+        max-height: 100px;
+      }
+
+      .price {
+        font-size: 14px;
+      }
+
+      .category {
+        font-size: 12px;
+      }
+
+      .staricon {
+        font-size: 9px;
+        width: 30px;
+        height: 14px;
+        line-height: 14px;
+      }
+
+      .rating {
+        width: 200px;
+        height: 90px;
+        font-size: 10px;
+      }
+
+      .r2first {
+        font-size: 14px;
+      }
+
+      .r2second,
+      .r3second {
+        font-size: 9px;
+      }
+
+      .modal-content {
+        margin: 20% auto;
+        width: 95%;
+        padding: 10px;
+      }
+
+      .add-to-cart {
+        font-size: 11px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .box1 {
+        padding: 4px 6px;
+        gap: 4px;
+      }
+
+      #child {
+        width: 50px;
+      }
+
+      .Explore,
+      .Plus {
+        font-size: 6px;
+      }
+
+      .plusicon {
+        width: 8px;
+        height: 8px;
+      }
+
+      .txt {
+        height: 24px;
+        font-size: 9px;
+        padding-right: 24px;
+      }
+
+      .icon {
+        font-size: 10px;
+      }
+
+      #login,
+      .seller,
+      .more,
+      .cart {
+        margin: 0 4px;
+        font-size: 9px;
+        padding: 3px;
+      }
+
+      .loginbtn {
+        padding: 3px 8px;
+        font-size: 9px;
+      }
+
+      .boxleft {
+        max-width: 240px;
+      }
+
+      .card {
+        padding: 6px;
+      }
+
+      .img2 {
+        max-height: 90px;
+      }
+
+      .price {
+        font-size: 13px;
+      }
+
+      .category {
+        font-size: 11px;
+      }
+
+      .staricon {
+        font-size: 8px;
+        width: 28px;
+        height: 12px;
+        line-height: 12px;
+      }
+
+      .rating {
+        width: 180px;
+        height: 80px;
+      }
+
+      .modal-content {
+        margin: 25% auto;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="box1">
+      <div id="child">
+        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/flipkart-plus_8d85f4.png"
+          alt="Flipkart Logo" style="width: 100%;" />
+        <div class="Explore">
+          <a href="#" style="color: #fff; text-decoration: none;">Explore <span class="Plus">Plus</span></a>
+          <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png"
+            class="plusicon" alt="Plus Icon" />
+        </div>
+      </div>
+      <div id="parent">
+        <div id="child2">
+          <input type="text" placeholder="Search for products, brands and more" class="txt" />
+          <div class="icon">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+      <div id="login">
+        <div class="loginbtn">Login</div>
+      </div>
+      <div class="seller">
+        <div id="sell">Become a Seller</div>
+      </div>
+      <div class="more">
+        <div id="more">More <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="cart">
+        <div id="cart"><i class="fas fa-shopping-cart"></i> Cart</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <button class="filter-toggle">Show Filters</button>
+      <div class="boxleft">
+        <div id="resultCount"></div>
+        <div class="box3">
+          <div class="filter-section">
+            <div class="box4">
+              Brand
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <div class="filter-content" id="brandOptions">
+              <label class="ff"><input type="checkbox" value="Samsung" /> SAMSUNG</label>
+              <label class="ff"><input type="checkbox" value="Motorola" /> MOTOROLA</label>
+              <label class="ff"><input type="checkbox" value="infinix" /> INFINIX</label>
+              <label class="ff"><input type="checkbox" value="Poco" /> POCO</label>
+              <label class="ff"><input type="checkbox" value="One Plus" /> ONEPLUS</label>
+              <label class="ff"><input type="checkbox" value="Realme" /> REALME</label>
+              <label class="ff"><input type="checkbox" value="Redmi" /> REDMI</label>
+            </div>
+
+            <div class="box4">
+              RAM
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <div class="filter-content" id="RamOptions">
+              <label class="ff"><input type="checkbox" name="ram" value="4 GB RAM" /> 4GB</label>
+              <label class="ff"><input type="checkbox" name="ram" value="8 GB RAM" /> 8GB</label>
+              <label class="ff"><input type="checkbox" name="ram" value="12 GB RAM" /> 12GB</label>
+            </div>
+
+            <div class="box4">
+              Shop By Price
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <div class="filter-content" id="priceOptions">
+              <label class="ff"><input type="checkbox" class="price-filter" value="0-20000" /> Under ₹20,000</label>
+              <label class="ff"><input type="checkbox" class="price-filter" value="20000-50000" /> ₹20,000 -
+                ₹50,000</label>
+              <label class="ff"><input type="checkbox" class="price-filter" value="50000-100000" /> ₹50,000 -
+                ₹1,00,000</label>
+              <label class="ff"><input type="checkbox" class="price-filter" value="100000-+" /> Over ₹1,00,000</label>
+            </div>
+
+            <div class="box4">
+              Screen Size
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <div class="filter-content" id="sizeOptions">
+              <label class="ff"><input type="checkbox" name="screenSize" value="3.5 - 3.9" /> 3.5 - 3.9 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="4 - 4.4" /> 4 - 4.4 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="4.5 - 4.9" /> 4.5 - 4.9 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="5 - 5.1" /> 5 - 5.1 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="5.2 - 5.4" /> 5.2 - 5.4 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="5.7 - 5.9" /> 5.7 - 5.9 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="6 - 6.3" /> 6 - 6.3 inch</label>
+              <label class="ff"><input type="checkbox" name="screenSize" value="All" /> All</label>
+            </div>
+
+            <div class="box4">
+              Color
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </div>
+            <div class="filter-content" id="ColorOptions">
+              <label class="ff">
+                <div class="color-circle black" style="background-color: black"></div> Black
+              </label>
+              <label class="ff">
+                <div class="color-circle gray" style="background-color: gray"></div> Gray
+              </label>
+              <label class="ff">
+                <div class="color-circle orange" style="background-color: orange"></div> Orange
+              </label>
+              <label class="ff">
+                <div class="color-circle white" style="background-color: white; border: 1px solid gray;"></div> White
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="boxright" id="mintu"></div>
+    </div>
+
+    <!-- Seller Modal -->
+    <div id="sellerModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Become a Flipkart Seller</h2>
+        <p>Join over 14 lakh sellers and reach 50 crore+ customers across India. Enjoy benefits like hassle-free
+          shipping, secure payments, and promotional tools.</p>
+        <form class="seller-form">
+          <input type="text" placeholder="Business Name" required />
+          <input type="email" placeholder="Email Address" required />
+          <input type="tel" placeholder="Phone Number" required />
+          <input type="text" placeholder="GSTIN" required />
+          <input type="text" placeholder="Bank Account Number" required />
+          <button type="submit">Register as Seller</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>My Cart</h2>
+        <div class="cart-items"></div>
+        <div class="cart-total">Total: ₹0</div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var movielist = [
+      {
+        id: 1,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Silverblue, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "256 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "129999",
+        delivery: "Free Delivery",
+        left: "",
+        exchange: "Upto ₹38150 On Exchange",
+        offer: "4% off",
+        bank: "Bank Offer",
+        url: "./images/s25.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "4"
+
+      },
+      {
+        id: 2,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium black, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "256 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "Free delivery",
+        left: "Only few left",
+        exchange: "Upto ₹38150 On Exchange",
+        offer: "",
+        bank: "",
+        url: "./images/s25 black.png",
+        price: 141999.00,
+        screen_size: "5 - 5.1",
+        rating: "4.1"
+
+
+      },
+      {
+        id: 3,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Silverblue, 1024 GB)",
+        ram: "12 GB RAM",
+        rom: "1024 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "Free delivery",
+        left: "",
+        exchange: "Upto ₹38150 On Exchange",
+        offer: "",
+        bank: "Bank Offer",
+        url: "./images/s25.png",
+        price: 165999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "4.3"
+
+      },
+      {
+        id: 4,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Silverblue, 512GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "141999",
+        delivery: "",
+        left: "",
+        exchange: "",
+        offer: "15% off",
+        url: "./images/s25 gray.png",
+        price: 19999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "4.2"
+
+
+      },
+
+      {
+        id: 5,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Gray, 256)",
+        ram: "12 GB RAM",
+        rom: "256 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "",
+        exchange: "",
+        offer: "",
+        url: "./images/s25 ai.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "4.5"
+
+      },
+
+      {
+        id: 6,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Whitesilver, 512 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "",
+        exchange: "",
+        offer: "",
+        url: "./images/s25 ai2.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "4.4"
+
+
+      },
+      {
+        id: 7,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Black, 512 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "",
+        exchange: "",
+        offer: "",
+        url: "./images/s25 black2.png",
+        price: 141999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "5"
+
+      },
+
+      {
+        id: 8,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S25 ULTRA 5G (Titanium Silverblue, 1024 GB)",
+        ram: "12 GB RAM",
+        rom: "1024 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "Only 2 left",
+        exchange: "",
+        offer: "",
+        url: "./images//s25 ai.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3"
+
+      },
+
+      {
+        id: 9,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy FE S21 5G ULTRA 5G (White, 128 GB)",
+        ram: "12 GB RAM",
+        rom: "128 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "",
+        exchange: "",
+        offer: "",
+        url: "./images//s25 gray2.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "3.5"
+
+      },
+      {
+        id: 10,
+        category: 'Samsung',
+        title: "SAMSUNG Galaxy S24 Ultra 5G (Titainium Gray, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "256 GB ROM",
+        display: "17.53 cm (6.9 inch) Quad HD+ Display",
+        camera: "200MP+50MP+50MP+10MP | 12MP Front Camera",
+        battery: "5000 mAh battery",
+        processor: "8 Elite Of Galaxy Processor",
+        warranty: "1Year Manufacturer Warranty for Device and 6 Months for in-box Accessories",
+        discount: "",
+        delivery: "",
+        left: "Only 1 left",
+        exchange: "",
+        offer: "",
+        url: "./images//s25 gray2.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "3.4"
+
+      },
+      {
+        id: 11,
+        category: 'Motorola',
+        title: "Motorola G85 5G (Olive Green, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "20,999",
+        delivery: "Free delivery",
+        exchange: "23% off",
+        offer: "",
+        url: "./images/motog85.png",
+        price: 15999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.3"
+
+      },
+      {
+        id: 12,
+        category: 'Motorola',
+        title: "Motorola g45 5G (Brilliant Green, 128 GB)",
+        ram: "4 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto2.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "3.2"
+
+      },
+      {
+        id: 13,
+        category: 'Motorola',
+        title: "Motorola G85 (Olive Green, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "256 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto3.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.1"
+
+      },
+      {
+        id: 14,
+        category: 'Motorola',
+        title: "Motorola g45 5G (Brilliant Blue, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto4.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "2"
+
+      },
+      {
+        id: 15,
+        category: 'Motorola',
+        title: "Motorola g45 5G (Pink Lavender, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto5.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "2.5"
+
+
+      },
+      {
+        id: 16,
+        category: 'Motorola',
+        title: "Motorola G85 5G (Cobalt Blue, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto6.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "2.4"
+
+      },
+      {
+        id: 17,
+        category: 'Motorola',
+        title: "Motorola g45 5G (Viva Magenta, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto7.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "2.3"
+
+      },
+      {
+        id: 18,
+        category: 'Motorola',
+        title: "Motorola G85 5G (Viva Magenta, 128 GB",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto8.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "2.2"
+
+      },
+      {
+        id: 19,
+        category: 'Motorola',
+        title: "Motorola g64 5G (Mint Green, 128 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto9.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "2.1"
+
+      },
+      {
+        id: 20,
+        category: 'Motorola',
+        title: "Motorola G85 5G (Urban gray, 256 GB)",
+        ram: "8 GB RAM",
+        rom: "128 GB ROM",
+        display: "16.94 cm (6.67 inch) Full HD+ Display",
+        camera: "50MP + 8MP | 32MP Front Camera",
+        battery: "5000 mAh Battery",
+        processor: "6s Gen 3 Processor",
+        warranty: "1 Year on Handset and 6 Months on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/moto10.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "1"
+
+      },
+
+      {
+        id: 21,
+        category: 'infinix',
+        title: "Infinx Hot 50 5G(Briliant Blue 128 GB)",
+        ram: "4 GB RAM ",
+        rom: "128 GB ROM | Expandable Upto 1 TB",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx1.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "1.5"
+
+      },
+      {
+        id: 22,
+        category: 'infinix',
+        title: "Infinix Note 40 Pro 5G (Vintage Green, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx2.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "1.4"
+
+      },
+      {
+        id: 23,
+        category: 'infinix',
+        title: "Infinix Hot 50 5G(Dreamy Purple, 128 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx3.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "1.3"
+
+      }, {
+        id: 24,
+        category: 'infinix',
+        title: "Infinix Note 40X 5G(Lime Green, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx4.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "1.2"
+
+      }, {
+        id: 25,
+        category: 'infinix',
+        title: "Infinix Note 40X 5G(Lime Green, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx5.png",
+        price: 141999.00,
+        screen_size: "5.7 - 5.9",
+        rating: "1.1"
+
+
+      }, {
+        id: 26,
+        category: 'infinix',
+        title: "Infinix Note 40X 5G(Lime Green, 256 GB",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx6.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "5"
+
+      },
+
+      {
+        id: 27,
+        category: 'infinix',
+        title: "Infinix Note 40 5G(Obsidian Black, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx7.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "4.5"
+
+      },
+
+      {
+        id: 28,
+        category: 'infinix',
+        title: "Infinix Note 40 5G (Racing Gray, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx8.png",
+        price: 141999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "4.4"
+
+      },
+
+      {
+        id: 29,
+        category: 'infinix',
+        title: "Infinix Hot 40 5G(Sage Green 128 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx9.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "4.3"
+
+      },
+
+      {
+        id: 30,
+        category: 'infinix',
+        title: "Infinix Note 40 5G (Palm blue, 256 GB)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "17.02 cm (6.7 inch) HD+ Display",
+        camera: "48MP + Depth Sensor | 8MP Front Camera",
+        battery: "5000 mAh Lithium-ion Polymer Battery",
+        processor: "Dimensity 6300 Processor",
+        warranty: "1 Year Warranty on Handset and 6 Months Warranty on Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/infinx10.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "4.2"
+
+      },
+
+      {
+        id: 31,
+        category: 'Poco',
+        title: "Poco C75 5G Enchanted Green 64 GB",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco1.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "4.1"
+
+      },
+
+      {
+        id: 32,
+        category: 'Poco',
+        title: "Poco M6 5G(Graphite Black,128 GB)",
+        ram: "4 GB Ram",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco2.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "3"
+
+      },
+      {
+        id: 33,
+        category: 'Poco',
+        title: "Poco C75 5G(Aqua Bliss, 64  GB)",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco3.png",
+        price: 141999.00,
+        screen_size: "4 - 4.4",
+        rating: "3.5"
+
+      },
+      {
+        id: 34,
+        category: 'Poco',
+        title: "Poco C75 5G(Silver Sttardust 64 GB)",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco4.png",
+        price: 141999.00,
+        screen_size: "6 - 6.3",
+        rating: "3.4"
+
+      }, {
+        id: 35,
+        category: 'Poco',
+        title: "Poco M6 Plus 5G Misty Lavender, 128 GB",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco5.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "3.3"
+
+
+      }, {
+        id: 36,
+        category: 'Poco',
+        title: "Poco m7 5G(Ocean blue, 128 GB) ",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco6.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "3.2"
+
+
+      }, {
+        id: 37,
+        category: 'Poco',
+        title: "Poco M6 Plus 5G (ice Silver, 128 GB)",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco7.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "3.1"
+
+      }, {
+        id: 38,
+        category: 'Poco',
+        title: "Poco M7 5G (Mint Green, 128 GB)",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco8.png",
+        price: 141999.00,
+        screen_size: "4 - 4.4",
+        rating: "2"
+
+      }, {
+        id: 39,
+        category: 'Poco',
+        title: "Poco M7 5G",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco9.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "2.5"
+
+      }, {
+        id: 40,
+        category: 'Poco',
+        title: "",
+        ram: "4 GB RAM",
+        rom: "64 GB ROM | Expandable upto 1 TB",
+        display: "17.48 cm (6.88 inch) HD+ Display",
+        camera: "50MP Rear Camera | 5MP Front Camera",
+        battery: "5160 mAh Battery",
+        processor: "4s Gen 2 5G Processor",
+        warranty: "1 Year Manufacturer Warranty for Phone and 6 Months Warranty for In the Box Accessories",
+        discount: "",
+        delivery: "",
+        exchange: "",
+        offer: "",
+        url: "./images/poco10.png",
+        price: 141999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "2.4"
+
+
+      },
+      {
+        id: 41,
+        category: 'One Plus',
+        title: "OnePlus 12 - Flowy Emerald",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.82-inch LTPO AMOLED, 120Hz, QHD+ (3168x1440)",
+        camera: "Rear: 50MP + 64MP + 48MP | Front: 32MP",
+        battery: "5400 mAh, 100W wired, 50W wireless charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹69,999 (limited offer)",
+        exchange: "Eligible for exchange offers",
+        offer: "Free OnePlus Buds with select purchases",
+        url: "./images/op1.png",
+        price: 69999.00,
+        screen_size: "4 - 4.4",
+        rating: "2.3"
+
+      },
+      {
+        id: 42,
+        category: 'One Plus',
+        title: "OnePlus 12 - Silky Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.82-inch LTPO AMOLED, 120Hz, QHD+ (3168x1440)",
+        camera: "Rear: 50MP + 64MP + 48MP | Front: 32MP",
+        battery: "5400 mAh, 100W wired, 50W wireless charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹69,999 (limited offer)",
+        exchange: "Eligible for exchange offers",
+        url: "./images/op2.png",
+        price: 69999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "2.2"
+
+      },
+      {
+        id: 43,
+        category: 'One Plus',
+        title: "OnePlus 11 5G - Titan Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.7-inch AMOLED, 120Hz, QHD+",
+        camera: "Rear: 50MP + 48MP + 32MP | Front: 16MP",
+        battery: "5000 mAh, 100W fast charging",
+        processor: "Snapdragon 8 Gen 2",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹61,999",
+        exchange: "Exchange up to ₹20,000",
+        url: "./images/op3.png",
+        price: 61999.00,
+        screen_size: "4 - 4.4",
+        rating: "2.1"
+
+      },
+      {
+        id: 44,
+        category: 'One Plus',
+        title: "OnePlus 11R - Sonic Black 512 GB",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.74-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 100W fast charging",
+        processor: "Snapdragon 8+ Gen 1",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹45,999",
+        exchange: "Available",
+        delivery: "1–3 business days",
+        url: "./images/op4.png",
+        price: 45999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "1"
+
+      },
+      {
+        id: 45,
+        category: 'One Plus',
+        title: "OnePlus 10T - Moonstone Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.7-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 16MP",
+        battery: "4800 mAh, 150W SUPERVOOC charging",
+        processor: "Snapdragon 8+ Gen 1",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹49,999",
+        url: "./images/op5.png",
+        price: 49999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "1.5"
+
+      },
+      {
+        id: 46,
+        category: 'One Plus',
+        title: "OnePlus 10 Pro - Emerald Forest",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.7-inch AMOLED, 120Hz, QHD+",
+        camera: "Rear: 48MP + 8MP + 50MP | Front: 32MP",
+        battery: "5000 mAh, 80W wired, 50W wireless",
+        processor: "Snapdragon 8 Gen 1",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹61,999",
+        exchange: "Available",
+        url: "./images/op6.png",
+        price: 61999.00,
+        screen_size: "4 - 4.4",
+        rating: "1.4"
+
+      },
+      {
+        id: 47,
+        category: 'One Plus',
+        title: "OnePlus Nord 3 5G - Misty Green",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.74-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 80W fast charging",
+        processor: "MediaTek Dimensity 9000",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹37,999",
+        delivery: "Free shipping available",
+        url: "./images/op7.png",
+        price: 37999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "1.3"
+
+      },
+      {
+        id: 48,
+        category: 'One Plus',
+        title: "OnePlus Nord CE 3 Lite - Chromatic Gray",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.72-inch LCD, 120Hz, FHD+",
+        camera: "Rear: 108MP + 2MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 67W fast charging",
+        processor: "Snapdragon 695",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹21,999",
+        offer: "Free 6-month Spotify Premium",
+        url: "./images/op8.png",
+        price: 21999.00,
+        screen_size: "4 - 4.4",
+        rating: "1.2"
+
+      },
+      {
+        id: 49,
+        category: 'One Plus',
+        title: "OnePlus Ace 2V - Glacier Blue (imported)",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.74-inch AMOLED, 120Hz, 1.5K resolution",
+        camera: "Rear: 64MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 80W fast charging",
+        processor: "MediaTek Dimensity 9000",
+        warranty: "Imported – may vary",
+        discount: "₹32,499",
+        url: "./images/op9.png",
+        price: 32499.00,
+        screen_size: "3.5 - 3.9",
+        rating: "1.1"
+
+      },
+      {
+        id: 50,
+        category: 'One Plus',
+        title: "OnePlus 12R - Iron Gray 512 GB",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.78-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 16MP",
+        battery: "5500 mAh, 100W SUPERVOOC charging",
+        processor: "Snapdragon 8 Gen 2",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹45,999",
+        offer: "Free OnePlus Bullets Z2 on purchase",
+        exchange: "Exchange up to ₹18,000",
+        delivery: "Same day delivery in select cities",
+        url: "./images/op1.png",
+        price: 45999.00,
+        screen_size: "5.2 - 5.4",
+        rating: "5"
+
+      },
+
+      {
+        id: 51,
+        category: "Realme",
+        title: "Realme 12 Pro+ - Submarine Blue",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 67W SuperVOOC charging",
+        processor: "MediaTek Dimensity 7050",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹22,999",
+        exchange: "Eligible for exchange offers",
+        offer: "Free 3-month YouTube Premium subscription",
+        url: "./images/r1.png",
+        price: 22999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "4"
+
+      },
+      {
+        id: 52,
+        category: "Realme",
+        title: "Realme 13 Pro+ - Monet Gold",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.83-inch OLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 50MP | Front: 32MP",
+        battery: "6000 mAh, 80W SuperVOOC charging",
+        processor: "Snapdragon 7s Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹33,999",
+        exchange: "Available",
+        url: "./images/r2.png",
+        price: 33999.00,
+        screen_size: "5 - 5.1",
+        rating: "4.5"
+
+      },
+      {
+        id: 53,
+        category: "Realme",
+        title: "Realme GT 6 - Speed Edition",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.78-inch LTPO AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 50MP | Front: 32MP",
+        battery: "5500 mAh, 100W SuperVOOC charging",
+        processor: "Snapdragon 8s Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹44,200",
+        exchange: "Eligible for exchange offers",
+        url: "./images/r3.png",
+        price: 44200.00,
+        screen_size: "3.5 - 3.9",
+        rating: "4.4"
+
+      },
+      {
+        id: 54,
+        category: "Realme",
+        title: "Realme P3 Pro - Phantom Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.83-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 2MP | Front: 16MP",
+        battery: "6000 mAh, 80W SuperVOOC charging",
+        processor: "Snapdragon 7s Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹26,999",
+        exchange: "Available",
+        url: "./images/r4.png",
+        price: 26999.00,
+        screen_size: "5 - 5.1",
+        rating: "4.3"
+
+      },
+      {
+        id: 55,
+        category: "Realme",
+        title: "Realme Narzo 60 Pro 5G - 1TB Edition",
+        ram: "12 GB RAM",
+        rom: "1 TB ROM",
+        display: "6.7-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 100MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 67W SuperVOOC charging",
+        processor: "MediaTek Dimensity 7050",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹29,999",
+        exchange: "Available",
+        url: "./images/r5.png",
+        price: 29999.00,
+        screen_size: "5 - 5.1",
+        rating: "4.2"
+
+      },
+      {
+        id: 56,
+        category: "Realme",
+        title: "Realme GT 7 Pro - Meteorite Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.78-inch LTPO AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 50MP | Front: 16MP",
+        battery: "5800 mAh, 120W SuperVOOC charging",
+        processor: "Snapdragon 8 Elite",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹54,998",
+        exchange: "Eligible for exchange offers",
+        url: "./images/r6.png",
+        price: 54998.00,
+        screen_size: "3.5 - 3.9",
+        rating: "4.1"
+
+      },
+      {
+        id: 57,
+        category: "Realme",
+        title: "Realme 14 Pro+ - Stardust Silver",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.83-inch OLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 50MP | Front: 32MP",
+        battery: "6000 mAh, 80W SuperVOOC charging",
+        processor: "Snapdragon 7s Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹33,999",
+        exchange: "Available",
+        url: "./images/r7.png",
+        price: 33999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "3"
+
+      },
+      {
+        id: 58,
+        category: "Realme",
+        title: "Realme 13 Pro - Glacier Blue",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.7-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 8MP + 2MP | Front: 32MP",
+        battery: "5200 mAh, 45W SuperVOOC charging",
+        processor: "Snapdragon 7s Gen 2",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹23,148",
+        exchange: "Available",
+        url: "./images/r8.png",
+        price: 23148.00,
+        screen_size: "3.5 - 3.9",
+        rating: "3.5"
+
+      }, {
+        id: 59,
+        category: "Realme",
+        title: "Realme 12 Pro - Titanium Gray",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP + 32MP + 8MP | Front: 16MP",
+        battery: "5000 mAh, 67W SUPERVOOC charging",
+        processor: "Snapdragon 6 Gen 1",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹25,999",
+        exchange: "Exchange available on select platforms",
+        "delivery": "Free delivery in metro cities",
+        url: "./images/r9.png",
+        price: 25999.00,
+        screen_size: "5 - 5.1",
+        rating: "3.4"
+
+      },
+      {
+        id: 60,
+        category: "Realme",
+        title: "Realme Narzo 70 Pro 5G - Glass Green",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch AMOLED, 120Hz, FHD+",
+        camera: "Rear: 50MP Sony IMX890 + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 67W SUPERVOOC charging",
+        processor: "MediaTek Dimensity 7050",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹21,999",
+        offer: "Free realme Buds T300 with pre-orders",
+        url: "./images/r10.png",
+        price: 21999.00,
+        screen_size: "5 - 5.1",
+        rating: "3.3"
+
+      },
+      {
+        id: 61,
+        category: "Redmi",
+        title: "Redmi K70 Pro 5G - Lamborghini Yellow",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1440 x 3200 pixels",
+        camera: "Rear: 50MP + 50MP (telephoto) + 12MP (ultrawide); Front: 16MP",
+        battery: "5000 mAh, 120W wired charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹69,999",
+        exchange: "Available",
+        offer: "Free Lamborghini-themed accessories with purchase",
+        url: "./images/mi1.png",
+        price: 69999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "3.2"
+
+      },
+      {
+        id: 62,
+        category: "Redmi",
+        title: "Redmi K70 Pro 5G - Lamborghini Green",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1440 x 3200 pixels",
+        camera: "Rear: 50MP + 50MP (telephoto) + 12MP (ultrawide); Front: 16MP",
+        battery: "5000 mAh, 120W wired charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹69,999",
+        exchange: "Available",
+        offer: "Free Lamborghini-themed accessories with purchase",
+        url: "./images/mi2.png",
+        price: 69999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.1"
+
+      },
+      {
+        id: 63,
+        category: "Redmi",
+        title: "Redmi K70 5G - Meteorite Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1440 x 3200 pixels",
+        camera: "Rear: 50MP + 12MP (ultrawide) + 2MP (depth); Front: 16MP",
+        battery: "5000 mAh, 67W wired charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹59,999",
+        exchange: "Available",
+        offer: "Free JBL headphones with purchase",
+        url: "./images/mi3.png",
+        price: 59999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "3"
+
+      },
+      {
+        id: 64,
+        category: "Redmi",
+        title: "Redmi K70 5G - Glacier Blue",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1440 x 3200 pixels",
+        camera: "Rear: 50MP + 12MP (ultrawide) + 2MP (depth); Front: 16MP",
+        battery: "5000 mAh, 67W wired charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹59,999",
+        exchange: "Available",
+        offer: "Free JBL headphones with purchase",
+        url: "./images/mi4.png",
+        price: 59999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.5"
+
+      },
+      {
+        id: 65,
+        category: "Redmi",
+        title: "Redmi K70E 5G - Phantom Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1220 x 2712 pixels",
+        camera: "Rear: 64MP + 8MP (ultrawide) + 2MP (macro); Front: 16MP",
+        battery: "5500 mAh, 90W wired charging",
+        processor: "Dimensity 8300 Ultra",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹49,999",
+        exchange: "Available",
+        offer: "Free screen protector with purchase",
+        url: "./images/mi5.png",
+        price: 49999.00,
+        screen_size: "5 - 5.1",
+        rating: "3.4"
+
+
+      },
+      {
+        id: 66,
+        category: "Redmi",
+        title: "Redmi K70E 5G - Mint Green",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1220 x 2712 pixels",
+        camera: "Rear: 64MP + 8MP (ultrawide) + 2MP (macro); Front: 16MP",
+        battery: "5500 mAh, 90W wired charging",
+        processor: "Dimensity 8300 Ultra",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹49,999",
+        exchange: "Available",
+        offer: "Free screen protector with purchase",
+        url: "./images/mi6.png",
+        price: 49999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.3"
+
+      },
+      {
+        "id": 67,
+        category: "Redmi",
+        title: "Redmi K70E 5G - Arctic White",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1220 x 2712 pixels",
+        camera: "Rear: 64MP + 8MP (ultrawide) + 2MP (macro); Front: 16MP",
+        battery: "5500 mAh, 90W wired charging",
+        processor: "Dimensity 8300 Ultra",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹49,999",
+        exchange: "Available",
+        offer: "Free screen protector with purchase",
+        url: "./images/mi7.png",
+        price: 49999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "3.2"
+
+      },
+      {
+        "id": 68,
+        category: "Redmi",
+        title: "Redmi K70 5G - Phantom Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch OLED, 120Hz, 1440 x 3200 pixels",
+        camera: "Rear: 50MP + 12MP (ultrawide) + 2MP (depth); Front: 16MP",
+        battery: "5000 mAh, 67W wired charging",
+        processor: "Snapdragon 8 Gen 3",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹59,999",
+        exchange: "Yes, up to ₹10,000 off",
+        url: "./images/mi8.png",
+        price: 59999.00,
+        screen_size: "3.5 - 3.9",
+        rating: "3.1"
+
+
+      },
+      {
+        "id": 69,
+        category: "Redmi",
+        title: "Redmi Note 13 Pro+ 5G - Fusion Purple",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch AMOLED, 120Hz, 1.5K resolution",
+        camera: "Rear: 200MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 120W fast charging",
+        processor: "MediaTek Dimensity 7200 Ultra",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹31,999",
+        exchange: "Available",
+        "delivery": "Free next-day delivery in metro areas",
+        offer: "Free Xiaomi Band 8 with purchase",
+        url: "./images/mi9.png",
+        price: 31999.00,
+        screen_size: "4.5 - 4.9",
+        rating: "2"
+
+      },
+      {
+        "id": 70,
+        category: "Redmi",
+        title: "Redmi Note 13 Pro+ 5G - Fusion Black",
+        ram: "12 GB RAM",
+        rom: "512 GB ROM",
+        display: "6.67-inch AMOLED, 120Hz, 1.5K resolution",
+        camera: "Rear: 200MP + 8MP + 2MP | Front: 16MP",
+        battery: "5000 mAh, 120W fast charging",
+        processor: "MediaTek Dimensity 7200 Ultra",
+        warranty: "1 year manufacturer warranty",
+        discount: "₹31,999",
+        exchange: "Yes",
+        url: "./images/mi10.png",
+        price: 31999.00,
+        screen_size: "5 - 5.1",
+        rating: "2.5`"
+
+
+      }
+    ];
+    let selectedCategories = [];
+    let selectedScreenSizes = [];
+    let selectedColor = [];
+    let selectedBrand = [];
+    let selectedRams = [];
+    let selectedPrices = [];
+    let cart = [];
+
+    $(document).ready(function () {
+      filterAndDisplay();
+      $(".box4").click(function () {
+        const next = $(this).next(".filter-content");
+        next.toggleClass("show");
+        const icon = $(this).find("i");
+        icon.toggleClass("fa-angle-down fa-angle-up");
+      });
+      $("input[name=ram]").change(filterByRam);
+      $('input[name="screenSize"]').change(filterByScreenSize);
+      $(".price-filter").change(filterByPrice);
+      $('#brandOptions input[type="checkbox"]').change(filterByBrand);
+      $(".color-circle").click(function () {
+        const color = $(this).attr("class").split(" ")[1];
+        toggleColor(color.charAt(0).toUpperCase() + color.slice(1));
+      });
+      $(".filter-toggle").click(function () {
+        $(".boxleft").toggleClass("active");
+      });
+      $("#sell").click(function () {
+        $("#sellerModal").show();
+      });
+      $("#cart").click(function () {
+        updateCartDisplay();
+        $("#cartModal").show();
+      });
+      $(".close").click(function () {
+        $(this).closest(".modal").hide();
+      });
+      $(".seller-form").submit(function (e) {
+        e.preventDefault();
+        alert("Thank you for registering as a seller! We'll contact you soon.");
+        $("#sellerModal").hide();
+      });
+      $(".checkout-btn").click(function () {
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+        } else {
+          alert("Proceeding to checkout...");
+          cart = [];
+          updateCartDisplay();
+          $("#cartModal").hide();
+        }
+      });
+    });
+
+    function filterByScreenSize() {
+      const selected = $('input[name="screenSize"]:checked').map(function () {
+        return $(this).val();
+      }).get();
+      if (selected.includes("All")) {
+        selectedScreenSizes = [];
+        $('input[name="screenSize"]').not('[value="All"]').prop("checked", false);
+      } else {
+        selectedScreenSizes = selected;
+        $('input[name="screenSize"][value="All"]').prop("checked", false);
+      }
+      filterAndDisplay();
+    }
+
+    function filterByRam() {
+      selectedRams = $("input[name=ram]:checked").map(function () {
+        return $(this).val();
+      }).get();
+      filterAndDisplay();
+    }
+
+    function filterByBrand() {
+      selectedBrand = $("#brandOptions input:checked").map(function () {
+        return $(this).val();
+      }).get();
+      filterAndDisplay();
+    }
+
+    function toggleColor(color) {
+      $(".color-circle").removeClass("selected");
+      $(`.color-circle.${color.toLowerCase()}`).addClass("selected");
+      selectedColor = [color.toLowerCase()];
+      filterAndDisplay();
+    }
+
+    function filterByPrice() {
+      selectedPrices = $(".price-filter:checked").map(function () {
+        return $(this).val();
+      }).get();
+      filterAndDisplay();
+    }
+
+    function addToCart(item) {
+      const existingItem = cart.find(cartItem => cartItem.title === item.title);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartItems = $(".cart-items");
+      cartItems.empty();
+      let total = 0;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        const cartItem = `
+          <div class="cart-item">
+            <img src="${item.url}" alt="${item.title}"/>
+            <span>${item.title}</span>
+            <select onchange="updateQuantity(${index}, this.value)">
+              ${[1, 2, 3, 4, 5].map(i => `<option value="${i}" ${item.quantity === i ? "selected" : ""}>${i}</option>`).join("")}
+            </select>
+            <span>₹${itemTotal.toLocaleString()}</span>
+            <button onclick="removeFromCart(${index})">Remove</button>
+          </div>`;
+        cartItems.append(cartItem);
+      });
+      $(".cart-total").text(`Total: ₹${total.toLocaleString()}`);
+    }
+
+    function updateQuantity(index, quantity) {
+      cart[index].quantity = parseInt(quantity);
+      updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    function filterAndDisplay() {
+      const filtered = movielist.filter(item => {
+        const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(item.category);
+        const matchScreenSize = selectedScreenSizes.length === 0 || selectedScreenSizes.includes(item.screen_size);
+        const matchRam = selectedRams.length === 0 || selectedRams.includes(item.ram);
+        const matchBrand = selectedBrand.length === 0 || selectedBrand.includes(item.category);
+        const matchColor = selectedColor.length === 0 || selectedColor.some(color => item.title.toLowerCase().includes(color.toLowerCase()));
+        const matchPrice = selectedPrices.length === 0 || selectedPrices.some(priceRange => {
+          const [minStr, maxStr] = priceRange.split("-");
+          const min = Number(minStr);
+          const max = maxStr === "+" ? Infinity : Number(maxStr);
+          return item.price >= min && item.price <= max;
+        });
+        return matchCategory && matchScreenSize && matchRam && matchBrand && matchColor && matchPrice;
+      });
+      $("#resultCount").text(`Showing ${filtered.length} result${filtered.length !== 1 ? "s" : ""}`);
+      const container = $("#mintu");
+      container.empty();
+      filtered.forEach(item => {
+        const card = `
+          <div class="card">
+            <div class="card2">
+              <img src="${item.url}" class="img2" alt="${item.title}" />
+            </div>
+            <div class="card3">
+              <div class="category">${item.title}</div>
+              <div class="card3inner">
+                <div class="staricon">${item.rating} ★</div>
+                <div class="rating">
+                  <div class="r2">
+                    <div class="r2first">${item.rating}★</div>
+                    <div class="r2second">18,946 Ratings & 1,840 Reviews</div>
+                  </div>
+                  <div class="r3">
+                    <div class="r3first">5★<progress value="100" max="100"></progress><div class="r3second">13,287</div></div>
+                    <div class="r3first">4★<progress value="20" max="100"></progress><div class="r3second">3,770</div></div>
+                    <div class="r3first">3★<progress value="10" max="100"></progress><div class="r3second">783</div></div>
+                    <div class="r3first">2★<progress value="5" max="100"></progress><div class="r3second">284</div></div>
+                    <div class="r3first">1★<progress value="25" max="100"></progress><div class="r3second">882</div></div>
+                  </div>
+                </div>
+                <ul>
+                  <li>${item.ram} | ${item.rom}</li>
+                  <li>${item.display}</li>
+                  <li>${item.camera}</li>
+                  <li>${item.battery}</li>
+                  <li>${item.processor}</li>
+                  <li>${item.warranty}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card4">
+              <div class="price">₹${item.price.toLocaleString()}</div>
+              <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" class="img3" alt="Flipkart Assured" />
+              <p class="left">${item.left}</p>
+              <div class="price-info">
+                <p class="discount">${item.discount}</p>
+                <p class="offer">${item.offer}</p>
+              </div>
+              <p class="delivery">${item.delivery}</p>
+              <p class="exchange-info">${item.exchange}</p>
+              <p class="bank">${item.bank}</p>
+              <button class="add-to-cart" onclick='addToCart(${JSON.stringify(item)})'>Add to Cart</button>
+            </div>
+          </div>`;
+        container.append(card);
+      });
+    }
+  </script>
+</body>
+
+</html>

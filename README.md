@@ -72,7 +72,7 @@ Build tools required: NONE.
 ----------------------------------------------------------------
 Suggested screenshot locations:
 
-    images/preview/homepage.png
+    images/Flipkart Smartphone homepage.png
     images/preview/smartphone-section.png
 
 ================================================================

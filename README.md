@@ -182,6 +182,5 @@ Free to use, modify, and learn from.
 
 ──────────────────────────────────────────────
 
-END OF FILE
-
+💡 This project is for learning and front-end development practice.
 ──────────────────────────────────────────────

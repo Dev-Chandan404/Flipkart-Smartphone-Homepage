@@ -30,7 +30,7 @@
 <br/>
 
 <a href="https://dev-chandan404.github.io/Flipkart-Smartphone-Homepage/">
-  <img src="./images/Sm.png alt="Flipkart Smartphone Homepage Preview"/>
+  <img src="./images/sm.png alt="Flipkart Smartphone Homepage Preview"/>
 </a>
 
 *A pixel-faithful Flipkart smartphone homepage clone — HTML, CSS, JS & jQuery*

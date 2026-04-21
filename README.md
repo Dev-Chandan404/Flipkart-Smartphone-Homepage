@@ -30,7 +30,7 @@
 <br/>
 
 <a href="https://dev-chandan404.github.io/Flipkart-Smartphone-Homepage/">
-  <img src="https://api.screenshotone.com/take?url=https://dev-chandan404.github.io/Flipkart-Smartphone-Homepage/&viewport_width=1280&viewport_height=720&format=jpg&image_quality=90" alt="Flipkart Smartphone Homepage Preview" width="90%" />
+  <img src="./images/sm.png alt="Flipkart Smartphone Homepage Preview"/>
 </a>
 
 *A pixel-faithful Flipkart smartphone homepage clone — HTML, CSS, JS & jQuery*
